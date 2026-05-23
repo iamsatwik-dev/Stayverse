@@ -1,0 +1,43 @@
+<% layout("/layout/boilerplate.ejs") %>
+<body>
+    <div class="row mt-3 mb-5">
+        <div class="col-md-8 offset-md-2">
+            <h3 class="mb-4 text-dark fw-bold">Create a New Listing</h3>
+            <form method="POST" action="/listings" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="title" class="form-label fw-semibold">Title</label>
+                    <input name="listing[title]" placeholder="Enter descriptive title" type="text" class="form-control" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="description" class="form-label fw-semibold">Description</label>
+                    <textarea name="listing[description]" placeholder="Describe the wonderful space" class="form-control" rows="4" required></textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="image" class="form-label fw-semibold">Image Link</label>
+                    <input name="listing[image]" placeholder="Enter image URL (optional)" type="text" class="form-control">
+                </div>
+                
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label fw-semibold">Price</label>
+                        <input name="listing[price]" placeholder="e.g. 1500" type="number" class="form-control" required>
+                    </div>
+                    
+                    <div class="mb-3 col-md-8">
+                        <label for="location" class="form-label fw-semibold">Location</label>
+                        <input name="listing[location]" placeholder="e.g. Malibu, California" type="text" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="country" class="form-label fw-semibold">Country</label>
+                    <input name="listing[country]" placeholder="e.g. United States" type="text" class="form-control" required>
+                </div>
+                
+                <button class="btn btn-dark add-btn w-100 rounded-pill py-2.5 mt-3 shadow-sm" type="submit">Create Listing</button>
+            </form>
+        </div>
+    </div>
+</body>

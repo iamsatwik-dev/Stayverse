@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-md bg-white border-bottom sticky-top shadow-sm py-2">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="/listings" style="color: #fe424d; font-size: 1.5rem; letter-spacing: -0.5px;">
+      <i class="fa-regular fa-compass fs-3"></i>
+      <span class="brand-name" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;">Stayverse</span>
+    </a>
+    
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <!-- Search Form -->
+        <form class="d-flex mx-auto my-2 my-lg-0 ms-md-4 me-md-auto" role="search" action="/listings" method="GET" style="max-width: 400px; width: 100%;">
+          <div class="input-group shadow-sm" style="border-radius: 50rem;">
+            <input class="form-control border-end-0 shadow-none rounded-start-pill px-4 py-2" type="search" name="q" placeholder="Search destinations, hotels..." aria-label="Search" style="border-color: #e2e8f0; font-size: 0.95rem;">
+            <button class="btn border-start-0 rounded-end-pill px-3" type="submit" style="background-color: #fe424d; color: white; border-color: #fe424d; transition: all 0.3s ease;">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </form>
+
+        <div class="navbar-nav align-items-md-center gap-2 mt-2 mt-md-0">
+          <a class="nav-link px-3 py-2 rounded-pill fw-semibold text-dark-emphasis" href="/listings">
+            <i class="fa-solid fa-list-ul me-1"></i>All Listings
+          </a>
+          <% if(!currUser) { %>
+          <a class="nav-link px-3 py-2 rounded-pill fw-semibold text-dark-emphasis" href="/signup">
+            <i class="fa-solid fa-user-plus me-1"></i><b>SignUp</b>
+          </a>
+          <a class="nav-link px-3 py-2 rounded-pill fw-semibold text-dark-emphasis" href="/login">
+            <i class="fa-solid fa-right-to-bracket me-1"></i><b>Login</b>
+          </a>
+          <% } else { %>
+          <a class="nav-link px-3 py-2 rounded-pill fw-semibold text-dark-emphasis" href="/logout">
+            <i class="fa-solid fa-right-from-bracket me-1"></i><b>Logout</b>
+          </a>
+          <a class="btn btn-danger nav-action-btn fw-bold px-4 py-2 rounded-pill shadow-sm ms-md-2" href="/listings/new" style="background-color: #fe424d; border: none; font-size: 0.9rem; transition: all 0.3s ease;">
+            <i class="fa-solid fa-circle-plus me-1"></i>Host a Stay
+          </a>
+          <% } %>
+        </div>
+      </div>
+  </div>
+</nav>

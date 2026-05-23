@@ -1,0 +1,53 @@
+<% layout("/layout/boilerplate.ejs") %>
+<body>
+    <% if (searchQuery && searchQuery.trim()) { %>
+        <div class="d-flex align-items-center justify-content-between mt-4 mb-3 px-2 flex-wrap gap-2">
+            <h3 class="text-dark fw-bold mb-0">
+                <i class="fa-solid fa-magnifying-glass text-muted me-2" style="font-size: 1.2rem;"></i>
+                Results for "<span style="color: #fe424d;"><%= searchQuery %></span>"
+            </h3>
+            <a href="/listings" class="btn btn-outline-dark rounded-pill px-4 py-2 fw-semibold" style="font-size: 0.9rem;">
+                <i class="fa-solid fa-xmark me-1"></i>Clear Search
+            </a>
+        </div>
+        <% if (allListings.length === 0) { %>
+            <div class="text-center py-5 my-5">
+                <i class="fa-solid fa-bed text-muted mb-3" style="font-size: 3.5rem; opacity: 0.3;"></i>
+                <h4 class="text-muted fw-semibold mt-3">No stays found in "<%= searchQuery %>"</h4>
+                <p class="text-secondary">Try searching for a different city or destination.</p>
+                <a href="/listings" class="btn btn-dark rounded-pill px-4 py-2 mt-2 shadow-sm" style="background-color: #fe424d; border: none;">
+                    <i class="fa-solid fa-house me-2"></i>Browse All Listings
+                </a>
+            </div>
+        <% } %>
+    <% } else { %>
+        <h3 class="mt-4 mb-4 text-dark fw-bold px-2">Explore Destinations</h3>
+    <% } %>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4 mb-5">
+        <% for(let listing of allListings){ %>
+            <div class="col">
+                <a href="/listings/<%= listing._id %>" class="listing-link">
+                    <div class="card h-100 listing-card border-0 rounded-4 overflow-hidden shadow-sm">
+                        <div class="card-img-container position-relative overflow-hidden">
+                            <img src="<%= listing.image.url %>" class="card-img-top listing-img" alt="<%= listing.title %>" style="height: 18rem; object-fit: cover; transition: transform 0.5s ease;">
+                            <div class="card-img-overlay-custom"></div>
+                        </div>
+                        <div class="card-body px-3 py-3">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <h5 class="card-title text-dark fw-bold mb-0 text-truncate" style="max-width: 80%;"><%= listing.title %></h5>
+                                <div class="rating-badge text-muted small">
+                                    <i class="fa-solid fa-star text-warning me-1"></i>New
+                                </div>
+                            </div>
+                            <p class="card-text text-secondary mb-2 small"><%= listing.location %>, <%= listing.country %></p>
+                            <p class="card-price mb-0">
+                                <span class="fw-bold text-dark fs-5">₹ <%= listing.price.toLocaleString("en-IN") %></span>
+                                <span class="text-secondary font-weight-normal text-muted small"> / night</span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% } %>
+    </div>
+</body>

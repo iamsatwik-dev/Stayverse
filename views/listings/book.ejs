@@ -1,0 +1,100 @@
+<% layout("/layout/boilerplate.ejs") %>
+<body>
+    <div class="row mt-4 mb-5">
+        <div class="col-lg-10 offset-lg-1">
+            <!-- Booking Header -->
+            <div class="d-flex align-items-center gap-3 mb-4 px-2">
+                <a href="/listings/<%= listing._id %>" class="btn btn-outline-dark rounded-pill px-3 py-2" style="font-size: 0.9rem;">
+                    <i class="fa-solid fa-arrow-left me-1"></i>Back
+                </a>
+                <h3 class="fw-bold text-dark mb-0">Complete Your Booking</h3>
+            </div>
+
+            <div class="row g-4">
+                <!-- Left Column: Listing Summary -->
+                <div class="col-md-7">
+                    <div class="card border-0 rounded-4 overflow-hidden shadow-sm h-100">
+                        <div style="height: 14rem; overflow: hidden; background-color: #f7f7f7;">
+                            <img src="<%= listing.image.url %>" alt="<%= listing.title %>" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="card-body px-4 py-4">
+                            <h4 class="fw-bold text-dark mb-2"><%= listing.title %></h4>
+                            <p class="text-secondary mb-3">
+                                <i class="fa-solid fa-location-dot text-danger me-1"></i><%= listing.location %>, <%= listing.country %>
+                            </p>
+                            
+                            <hr class="opacity-15 my-3">
+
+                            <!-- Booking Summary -->
+                            <div class="booking-summary">
+                                <h6 class="fw-bold text-dark mb-3">
+                                    <i class="fa-solid fa-receipt me-2" style="color: #00b894;"></i>Price Summary
+                                </h6>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="text-secondary">Base price per night</span>
+                                    <span class="fw-semibold text-dark">₹ <%= listing.price.toLocaleString("en-IN") %></span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="text-secondary">Service fee</span>
+                                    <span class="fw-semibold text-dark">₹ 0</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="text-secondary">Taxes</span>
+                                    <span class="fw-semibold text-dark">Included</span>
+                                </div>
+                                <hr class="opacity-15 my-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-dark fs-5">Total</span>
+                                    <span class="fw-bold fs-4" style="color: #00b894;">₹ <%= amount.toLocaleString("en-IN") %></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: QR Code Payment -->
+                <div class="col-md-5">
+                    <div class="card border-0 rounded-4 shadow-sm">
+                        <div class="card-body px-4 py-4 text-center">
+                            <!-- Payment Header -->
+                            <div class="mb-4">
+                                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 60px; height: 60px; background: linear-gradient(135deg, #e8f8f5, #d1f2eb);">
+                                    <i class="fa-solid fa-qrcode fs-4" style="color: #00b894;"></i>
+                                </div>
+                                <h5 class="fw-bold text-dark mb-1">Scan to Pay</h5>
+                                <p class="text-secondary small mb-0">Use any UPI app to complete payment</p>
+                            </div>
+
+                            <!-- QR Code -->
+                            <div class="qr-code-container d-inline-block p-3 rounded-4 mb-4" style="background-color: #f8f9fa; border: 2px dashed #e2e8f0;">
+                                <img src="<%= qrCodeDataURL %>" alt="UPI Payment QR Code" class="img-fluid" style="border-radius: 12px; max-width: 220px;">
+                            </div>
+
+                            <!-- UPI Apps hint -->
+                            <div class="mb-4">
+                                <p class="text-muted small mb-2 fw-semibold">Supported UPI Apps</p>
+                                <div class="d-flex justify-content-center gap-3">
+                                    <span class="badge bg-light text-dark border py-2 px-3 rounded-pill small fw-medium">Google Pay</span>
+                                    <span class="badge bg-light text-dark border py-2 px-3 rounded-pill small fw-medium">PhonePe</span>
+                                    <span class="badge bg-light text-dark border py-2 px-3 rounded-pill small fw-medium">Paytm</span>
+                                </div>
+                            </div>
+
+                            <hr class="opacity-15 my-3">
+
+                            <!-- Confirm Button -->
+                            <form method="POST" action="/listings/<%= listing._id %>/book/confirm">
+                                <button type="submit" class="btn w-100 py-3 rounded-pill fw-bold shadow-sm confirm-booking-btn" style="background: linear-gradient(135deg, #00b894, #00cec9); color: white; border: none; font-size: 1.05rem; transition: all 0.3s ease;">
+                                    <i class="fa-solid fa-circle-check me-2"></i>Confirm Booking
+                                </button>
+                            </form>
+                            <p class="text-muted small mt-3 mb-0">
+                                <i class="fa-solid fa-shield-halved me-1"></i>Your payment is 100% secure
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
